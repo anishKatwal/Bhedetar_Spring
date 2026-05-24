@@ -1,0 +1,15 @@
+{
+  "inquiries": [],
+  "sales": [
+    {
+      "id": 1,
+      "customer": "anish",
+      "location": "Dharan",
+      "amount": 1800,
+      "paid": 900,
+      "creditDays": 2,
+      "date": "2026-05-21",
+      "enteredBy": "admin"
+    }
+  ]
+}

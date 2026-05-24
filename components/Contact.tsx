@@ -1,0 +1,210 @@
+"use client";
+
+import { useState } from "react";
+import { deliveryAreas } from "./DeliveryAreas";
+
+type Inquiry = {
+  id: string;
+  name: string;
+  phone: string;
+  location: string;
+  eventType: string;
+  bottleSize: string;
+  quantity: string;
+  wrapperNeed: string;
+  message: string;
+  createdAt: string;
+};
+
+export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    location: "Dharan",
+    eventType: "Wedding",
+    bottleSize: "500ml",
+    quantity: "",
+    wrapperNeed: "Need custom wrapper design",
+    message: "",
+  });
+  const [lastInquiry, setLastInquiry] = useState<Inquiry | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setSubmitting(true);
+    setSuccessMessage(null);
+    setErrorMessage(null);
+
+    const inquiry: Inquiry = {
+      id: `BS-${Date.now().toString().slice(-6)}`,
+      ...formData,
+      createdAt: new Date().toISOString(),
+    };
+
+    try {
+      const response = await fetch("/api/inquiries", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(inquiry),
+      });
+
+      const payload = await response.json();
+      if (!response.ok) {
+        throw new Error(payload.error || "Unable to save inquiry.");
+      }
+
+      setLastInquiry(payload.inquiry);
+      setSuccessMessage("Inquiry saved to the server successfully.");
+      setFormData({
+        name: "",
+        phone: "",
+        location: "Dharan",
+        eventType: "Wedding",
+        bottleSize: "500ml",
+        quantity: "",
+        wrapperNeed: "Need custom wrapper design",
+        message: "",
+      });
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : "Submission failed.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const fieldClass =
+    "w-full border border-[#cbd5e1] px-3 py-3 text-[#0a2540] outline-none transition focus:border-[#0e6ba8] focus:ring-2 focus:ring-[#38bdf8]/30";
+
+  return (
+    <section id="contact" className="bg-[#f8fafc] px-5 py-20">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-14 max-w-3xl">
+          <p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-[#0e6ba8]">
+            Inquiry
+          </p>
+          <h2 className="font-serif text-4xl font-bold text-[#0a2540] md:text-6xl">
+            Tell us what bottle you need.
+          </h2>
+          <p className="mt-5 text-lg leading-8 text-[#475569]">
+            This inquiry now submits to a real server API. The next step is
+            email, WhatsApp, CRM, or API-backed order management.
+          </p>
+        </div>
+
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="border border-[#dbeafe] bg-white p-6">
+            <h3 className="text-2xl font-bold text-[#0a2540]">Contact details</h3>
+            <div className="mt-8 space-y-6">
+              {[
+                ["Location", "Bhedetar, Dhankuta, Nepal"],
+                ["Phone", "+977-9800000000"],
+                ["Email", "info@bhedetarspring.com"],
+                ["Delivery", deliveryAreas.join(", ")],
+                ["Orders", "Retail, wholesale, Jaruwa packaging, custom wrappers, and event supply"],
+              ].map(([label, value]) => (
+                <div key={label} className="border-l-4 border-[#38bdf8] pl-4">
+                  <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#64748b]">
+                    {label}
+                  </p>
+                  <p className="mt-1 text-[#0a2540]">{value}</p>
+                </div>
+              ))}
+            </div>
+
+            {lastInquiry && (
+              <div className="mt-8 border border-[#bbf7d0] bg-[#f0fdf4] p-4 text-[#166534]">
+                Inquiry saved to server: <strong>{lastInquiry.id}</strong>. It is now stored in SQLite.
+              </div>
+            )}
+          </div>
+
+          <form onSubmit={handleSubmit} className="border border-[#dbeafe] bg-white p-6">
+            {successMessage && (
+              <div className="mb-4 rounded-2xl border border-[#bbf7d0] bg-[#f0fdf4] p-4 text-sm text-[#166534]">
+                {successMessage}
+              </div>
+            )}
+            {errorMessage && (
+              <div className="mb-4 rounded-2xl border border-[#fecaca] bg-[#fef2f2] p-4 text-sm text-[#991b1b]">
+                {errorMessage}
+              </div>
+            )}
+            <div className="grid gap-4 md:grid-cols-2">
+              <label>
+                <span className="mb-2 block text-sm font-bold text-[#0a2540]">Full name</span>
+                <input name="name" value={formData.name} onChange={handleChange} required className={fieldClass} placeholder="Client name" />
+              </label>
+              <label>
+                <span className="mb-2 block text-sm font-bold text-[#0a2540]">Phone</span>
+                <input name="phone" type="tel" value={formData.phone} onChange={handleChange} required className={fieldClass} placeholder="+977..." />
+              </label>
+              <label>
+                <span className="mb-2 block text-sm font-bold text-[#0a2540]">Event or order type</span>
+                <select name="eventType" value={formData.eventType} onChange={handleChange} className={fieldClass}>
+                  {["Wedding", "Birthday", "Hiking event", "Hotel or cafe", "Office supply", "Retail shop", "Jaruwa packaging", "Other"].map((option) => (
+                    <option key={option}>{option}</option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                <span className="mb-2 block text-sm font-bold text-[#0a2540]">Delivery area</span>
+                <select name="location" value={formData.location} onChange={handleChange} className={fieldClass}>
+                  {deliveryAreas.map((option) => (
+                    <option key={option}>{option}</option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                <span className="mb-2 block text-sm font-bold text-[#0a2540]">Bottle size</span>
+                <select name="bottleSize" value={formData.bottleSize} onChange={handleChange} className={fieldClass}>
+                  {["500ml", "900ml", "1L", "20L", "Jaruwa packaging"].map((option) => (
+                    <option key={option}>{option}</option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                <span className="mb-2 block text-sm font-bold text-[#0a2540]">Quantity</span>
+                <input name="quantity" type="number" min="1" value={formData.quantity} onChange={handleChange} required className={fieldClass} placeholder="Example: 240" />
+              </label>
+              <label>
+                <span className="mb-2 block text-sm font-bold text-[#0a2540]">Wrapper need</span>
+                <select name="wrapperNeed" value={formData.wrapperNeed} onChange={handleChange} className={fieldClass}>
+                  {["Need custom wrapper design", "I have my own design", "Standard Bhedetar label", "Need help choosing"].map((option) => (
+                    <option key={option}>{option}</option>
+                  ))}
+                </select>
+              </label>
+            </div>
+
+            <label className="mt-4 block">
+              <span className="mb-2 block text-sm font-bold text-[#0a2540]">Message</span>
+              <textarea name="message" value={formData.message} onChange={handleChange} rows={4} className={`${fieldClass} resize-none`} placeholder="Date, location, wrapper idea, delivery note..." />
+            </label>
+
+            <button
+              type="submit"
+              disabled={submitting}
+              className="mt-5 w-full bg-[#0a2540] py-3 font-bold text-white transition hover:bg-[#0e6ba8] disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {submitting ? "Saving inquiry…" : "Save Inquiry"}
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+}
