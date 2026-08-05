@@ -2,39 +2,21 @@ import Image from "next/image";
 
 const media = [
   {
-    kind: "image",
-    src: "/photos/shrink-wrap-machine.jpg",
-    title: "Shrink-wrap bundling unit",
-    detail: "Bundles finished bottles in plastic film for transport-ready packs.",
-  },
-  {
     kind: "video",
-    src: "/photos/plant-line-1148.mov",
-    title: "Packaging line footage",
-    detail: "Production floor footage from the bottled water packing area.",
-  },
-  {
-    kind: "video",
-    src: "/photos/plant-line-1162.mov",
-    title: "Rotary labeling and capping section",
-    detail: "Bottle handling section where labels and caps are applied.",
-  },
-  {
-    kind: "video",
-    src: "/photos/plant-line-1163.mov",
+    src: "/photos/video1.mp4",
     title: "Rinsing, filling, and capping monoblock",
     detail: "Enclosed Filmatic Systems machine for hygienic bottle processing.",
   },
   {
     kind: "video",
-    src: "/photos/plant-line-1168.mov",
-    title: "Bottle inspection and label finish",
+    src: "/photos/video3.mov",
+    title: "Bottle inspection and prior to labelling",
     detail: "Close-up checks around the filled and labelled bottle output.",
   },
   {
     kind: "video",
-    src: "/photos/plant-line-1169.mov",
-    title: "RO water treatment skid",
+    src: "/photos/video2.mov",
+    title: " label finish and packaging",
     detail: "Reverse osmosis and filtration controls before water reaches filling.",
   },
 ];
@@ -79,7 +61,7 @@ export default function ProductionGallery() {
                     playsInline
                     preload="metadata"
                   >
-                    <source src={item.src} type="video/quicktime" />
+                    <source src={item.src} type="video/mp4" />
                   </video>
                 )}
               </div>

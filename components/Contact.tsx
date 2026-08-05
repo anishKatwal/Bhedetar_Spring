@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { deliveryAreas } from "./DeliveryAreas";
 
 type Inquiry = {
@@ -27,9 +28,7 @@ export default function Contact() {
     wrapperNeed: "Need custom wrapper design",
     message: "",
   });
-  const [lastInquiry, setLastInquiry] = useState<Inquiry | null>(null);
   const [submitting, setSubmitting] = useState(false);
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleChange = (
@@ -43,15 +42,17 @@ export default function Contact() {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+
     setSubmitting(true);
-    setSuccessMessage(null);
-    setErrorMessage(null);
+  setErrorMessage(null);
 
     const inquiry: Inquiry = {
       id: `BS-${Date.now().toString().slice(-6)}`,
       ...formData,
       createdAt: new Date().toISOString(),
     };
+
+    const toastId = toast.loading("Sending your inquiry...");
 
     try {
       const response = await fetch("/api/inquiries", {
@@ -63,12 +64,19 @@ export default function Contact() {
       });
 
       const payload = await response.json();
+
       if (!response.ok) {
-        throw new Error(payload.error || "Unable to save inquiry.");
+        throw new Error(payload.error || "Unable to submit inquiry");
       }
 
-      setLastInquiry(payload.inquiry);
-      setSuccessMessage("Inquiry saved to the server successfully.");
+      if (!payload.emailSent) {
+        throw new Error(payload.error || "Email was not sent");
+      }
+toast.success("Inquiry submitted successfully!", {
+  id: toastId,
+  duration: 3000,
+});
+
       setFormData({
         name: "",
         phone: "",
@@ -80,7 +88,12 @@ export default function Contact() {
         message: "",
       });
     } catch (error) {
-      setErrorMessage(error instanceof Error ? error.message : "Submission failed.");
+      const message =
+        error instanceof Error ? error.message : "Submission failed";
+
+      toast.error(message, { id: toastId });
+      setErrorMessage(message);
+      console.error(error);
     } finally {
       setSubmitting(false);
     }
@@ -125,19 +138,10 @@ export default function Contact() {
               ))}
             </div>
 
-            {lastInquiry && (
-              <div className="mt-8 border border-[#bbf7d0] bg-[#f0fdf4] p-4 text-[#166534]">
-                Inquiry saved to server: <strong>{lastInquiry.id}</strong>. It is now stored in SQLite.
-              </div>
-            )}
           </div>
 
           <form onSubmit={handleSubmit} className="border border-[#dbeafe] bg-white p-6">
-            {successMessage && (
-              <div className="mb-4 rounded-2xl border border-[#bbf7d0] bg-[#f0fdf4] p-4 text-sm text-[#166534]">
-                {successMessage}
-              </div>
-            )}
+           
             {errorMessage && (
               <div className="mb-4 rounded-2xl border border-[#fecaca] bg-[#fef2f2] p-4 text-sm text-[#991b1b]">
                 {errorMessage}

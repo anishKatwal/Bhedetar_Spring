@@ -4,28 +4,29 @@ export default function Products() {
       name: "Spring Water 500ml",
       price: "Rs. 10",
       description: "Easy carry bottle for events, retail, schools, and daily use.",
-      features: ["Jaruwa packaging option", "Custom wrapper ready", "Quick chilled sales"],
+      features: ["Bhedetar Spring water", "Custom wrapper ready", "Quick chilled sales"],
     },
-    {
-      name: "Spring Water 900ml",
-      price: "Rs. 20",
-      description: "A practical size for meetings, travel groups, and restaurants.",
-      features: ["Good table size", "Jaruwa blue label", "Event label option"],
-    },
+    
     {
       name: "Spring Water 1L",
       price: "Rs. 25",
       description: "Family, office, and roadside-shop bottle with better volume.",
-      features: ["Daily hydration", "Home delivery ready", "Strong shelf presence"],
+      features: ["Bhedetar Spring water", "Bulk order ready", "Strong shelf presence"],
     },
+
+{
+  name: "Spring Water 900 ml",
+  price: "Rs. 40",
+  description: "Ideal for families, workplaces, restaurants, and retail stores, offering more hydration in a convenient size.",
+  features: [
+    "Natural Bhedetar Spring Water",
+    "Suitable for bulk and corporate orders",
+    "Durable bottle with strong shelf appeal"
+  ],
+},
+    
     {
-      name: "Spring Water 20L",
-      price: "Rs. 60",
-      description: "Commercial jar for hotels, offices, cafes, and repeat supply.",
-      features: ["Commercial use", "Credit ledger ready", "Route delivery"],
-    },
-    {
-      name: "Jaruwa ad",
+      name: "Bhedetar Spring Bottlers customized advertising and branding",
       price: "Ask",
       description: "Packaged-water supply with a deep blue hill-water label direction.",
       features: ["Retail packaging", "Mineral table label", "Bulk order ready"],

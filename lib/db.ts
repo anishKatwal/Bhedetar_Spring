@@ -1,15 +1,26 @@
-import fs from "fs";
+import Database from "better-sqlite3";
 import path from "path";
-import { Low } from "lowdb";
-import { JSONFile } from "lowdb/node";
 
-const dbPath = path.join(process.cwd(), "data", "bhedetar-db.json");
-const dbDir = path.dirname(dbPath);
-if (!fs.existsSync(dbDir)) {
-  fs.mkdirSync(dbDir, { recursive: true });
-}
+const dbPath = path.join(process.cwd(), "inquiries.db");
+const db = new Database(dbPath);
 
-export type Inquiry = {
+// Create inquiries table
+db.exec(`
+  CREATE TABLE IF NOT EXISTS inquiries (
+    id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    phone TEXT NOT NULL,
+    location TEXT NOT NULL,
+    eventType TEXT NOT NULL,
+    bottleSize TEXT NOT NULL,
+    quantity INTEGER NOT NULL,
+    wrapperNeed TEXT NOT NULL,
+    message TEXT,
+    createdAt TEXT NOT NULL
+  )
+`);
+
+export interface Inquiry {
   id: string;
   name: string;
   phone: string;
@@ -20,56 +31,50 @@ export type Inquiry = {
   wrapperNeed: string;
   message: string;
   createdAt: string;
-};
-
-export type Sale = {
-  id: number;
-  customer: string;
-  location: string;
-  amount: number;
-  paid: number;
-  creditDays: number;
-  date: string;
-  enteredBy: string;
-};
-
-type Data = {
-  inquiries: Inquiry[];
-  sales: Sale[];
-};
-
-const adapter = new JSONFile<Data>(dbPath);
-const db = new Low<Data>(adapter);
-
-async function initDb() {
-  await db.read();
-  db.data ||= { inquiries: [], sales: [] };
-  await db.write();
-  return db;
 }
 
 export async function createInquiry(inquiry: Inquiry) {
-  const database = await initDb();
-  database.data!.inquiries.unshift(inquiry);
-  await database.write();
+  const stmt = db.prepare(`
+    INSERT INTO inquiries (
+      id,
+      name,
+      phone,
+      location,
+      eventType,
+      bottleSize,
+      quantity,
+      wrapperNeed,
+      message,
+      createdAt
+    )
+    VALUES (
+      @id,
+      @name,
+      @phone,
+      @location,
+      @eventType,
+      @bottleSize,
+      @quantity,
+      @wrapperNeed,
+      @message,
+      @createdAt
+    )
+  `);
+
+  stmt.run(inquiry);
+
   return inquiry;
 }
 
-export async function getInquiries() {
-  const database = await initDb();
-  return database.data!.inquiries.sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
+export async function getInquiries(): Promise<Inquiry[]> {
+  const stmt = db.prepare(`
+    SELECT *
+    FROM inquiries
+    ORDER BY createdAt DESC
+  `);
+
+  return stmt.all() as Inquiry[];
 }
 
-export async function createSale(sale: Omit<Sale, "id">) {
-  const database = await initDb();
-  const nextId = (database.data!.sales[0]?.id ?? 0) + 1;
-  const newSale: Sale = { id: nextId, ...sale };
-  database.data!.sales.unshift(newSale);
-  await database.write();
-  return newSale;
-}
+export default db;
 
-export async function getSales() {
-  const database = await initDb();
-  return database.data!.sales.sort((a, b) => (a.date < b.date || (a.date === b.date && a.id < b.id) ? 1 : -1));
-}

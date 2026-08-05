@@ -25,7 +25,6 @@ export default function Home() {
       <DeliveryAreas />
       <Purification />
       <Benefits />
-      <PosStarter />
       <Contact />
       <Footer />
     </div>

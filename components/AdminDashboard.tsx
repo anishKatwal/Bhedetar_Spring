@@ -65,7 +65,6 @@ export default function AdminDashboard() {
         <div className="mb-10 rounded-3xl border border-[#dbeafe] bg-white p-10 shadow-sm">
           <h1 className="text-4xl font-bold text-[#0a2540]">Bhedetar Admin</h1>
           <p className="mt-3 text-lg text-[#475569]">
-            This admin page uses a real SQLite database and API endpoints. It shows inquiries and staff sales in one place.
           </p>
         </div>
 

@@ -1,11 +1,10 @@
 export default function CustomWraps() {
   const ideas = [
-    "Bride and groom name with wedding date",
-    "Birthday theme, photo, age, and thank-you line",
-    "Hiking group route map and team badge",
-    "Hotel, cafe, or office brand wrapper",
-    "School, sports, mela, or cultural event design",
-    "Festival gifting with family or sponsor name",
+    "Hotels, resorts, and guest room branded water",
+    "Travel agencies and tour package branding",
+    "Airports, lounges, and VIP hospitality services",
+    "Adventure tourism and trekking package water",
+    "Conference halls and event venues",
   ];
 
   return (

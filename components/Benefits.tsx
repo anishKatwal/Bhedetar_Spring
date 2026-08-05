@@ -4,7 +4,6 @@ export default function Benefits() {
     ["Custom wrapper service", "Create a bottle wrapper around the client's theme, message, date, sponsor, or brand."],
     ["Clear process", "The purification story is simple enough for customers to trust and staff to explain."],
     ["Bulk order thinking", "Product, inquiry, delivery, and credit details are already shaped for larger orders."],
-    ["POS preparation", "The site includes a small ledger preview for customer, location, paid, and credit tracking."],
     ["Delivery-ready catalog", "Bottle sizes and order context are organized for retail, hotels, offices, and events."],
   ];
 
