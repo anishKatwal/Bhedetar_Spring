@@ -65,48 +65,21 @@ export default function Hero() {
 
         {/* Right Graphic Column (Mockup Bottle & Intersecting Overlays) */}
         <div className="relative">
-          <Image
-            src="/photos/bottle.png"
-            alt="Bhedetar Spring Water Bottle"
-            width={220}
-            height={560}
-            priority
-            className="object-contain ml-[80px]"
-          />
+  {/* Glow Effect */}
+  <div className="absolute -inset-4 rounded-[32px] bg-[#38bdf8]/20 blur-3xl" />
 
-          {/* Jaruwa Centered Custom Label - Positioned directly over the middle of the bottle */}
-          <div className="absolute mt-[620px] ml-[920px] w-[160px] -translate-x-1/2 -translate-y-1/2 z-10 w-[230px] bg-[#0a2540]/90 py-4 text-center shadow-2xl border-y-2 border-[#38bdf8] backdrop-blur-sm">
-            <p className="font-serif text-2xl font-bold tracking-wide text-white mt-[20px]">
-              Bhedetar
-            </p>
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#38bdf8] mt-0.5">
-              Spring
-            </p>
-            <div className="my-3 h-[1px] w-12 bg-white/20 mx-auto" />
-            <p className="text-[9px] font-medium uppercase tracking-widest text-white/60 px-1">
-              100%
-            </p>
-          </div>
-
-          {/* Floating Feature Badges - Placed correctly out in relative layout space */}
-          <div className="absolute mb-[125px] ml-[630px] bottom-16 -left-12 z-20 transform rounded-lg border border-white/20 bg-black/40 p-4 shadow-xl backdrop-blur-md transition-transform duration-300 hover:scale-105 max-w-[160px]">
-            <p className="text-xs font-bold uppercase tracking-wider text-[#38bdf8]">
-              Wedding label
-            </p>
-            <p className="mt-0.5 text-[11px] text-white/80 leading-tight">
-              Names, date & custom themes
-            </p>
-          </div>
-
-          <div className="absolute mr-[60px] mt-[50px] top-24 -right-12 z-20 transform rounded-lg border border-white/20 bg-black/40 p-4 shadow-xl backdrop-blur-md transition-transform hover:scale-105 duration-300 max-w-[160px]">
-            <p className="text-xs font-bold uppercase tracking-wider text-[#38bdf8]">
-              Hiking pack
-            </p>
-            <p className="text-[11px] text-white/80 mt-0.5 leading-tight">
-              Route matrix, sponsors & maps
-            </p>
-          </div>
-        </div>
+  {/* Main Product Card */}
+  <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-white/5 shadow-2xl backdrop-blur-sm">
+    <Image
+      src="/photos/intro.png" // save the attached image here
+      alt="Bhedetar Spring Product Information"
+      width={1152}
+      height={1536}
+      priority
+      className="h-auto w-full object-cover"
+    />
+  </div>
+</div>
       </div>
     </section>
   );

@@ -112,10 +112,7 @@ toast.success("Inquiry submitted successfully!", {
           <h2 className="font-serif text-4xl font-bold text-[#0a2540] md:text-6xl">
             Tell us what bottle you need.
           </h2>
-          <p className="mt-5 text-lg leading-8 text-[#475569]">
-            This inquiry now submits to a real server API. The next step is
-            email, WhatsApp, CRM, or API-backed order management.
-          </p>
+         
         </div>
 
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
@@ -127,7 +124,7 @@ toast.success("Inquiry submitted successfully!", {
                 ["Phone", "+977-9800000000"],
                 ["Email", "info@bhedetarspring.com"],
                 ["Delivery", deliveryAreas.join(", ")],
-                ["Orders", "Retail, wholesale, Jaruwa packaging, custom wrappers, and event supply"],
+                ["Orders", "Retail, wholesale, custom wrappers, and event supply"],
               ].map(([label, value]) => (
                 <div key={label} className="border-l-4 border-[#38bdf8] pl-4">
                   <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#64748b]">

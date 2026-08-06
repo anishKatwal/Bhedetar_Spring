@@ -11,9 +11,7 @@ export default function Navigation() {
     ["Wrappers", "#custom-wraps"],
     ["Delivery", "#delivery"],
     ["Purification", "#purification"],
-    ["Inquiry", "#contact"],
-    ["Staff", "#pos"],
-    ["Admin", "/admin"],
+   
   ];
 
   return (

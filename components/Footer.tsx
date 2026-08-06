@@ -31,9 +31,7 @@ export default function Footer() {
             <h4 className="font-bold">Bottle sizes</h4>
             <ul className="mt-4 space-y-2 text-sm text-white/70">
               <li>500ml</li>
-              <li>900ml</li>
               <li>1L</li>
-              <li>20L</li>
             </ul>
           </div>
 
@@ -50,7 +48,6 @@ export default function Footer() {
 
         <div className="mt-8 flex flex-col justify-between gap-3 text-sm text-white/60 md:flex-row">
           <p>Copyright {currentYear} Bhedetar Spring. All rights reserved.</p>
-          <p>Tamaso Studios {currentYear}</p>
         </div>
       </div>
     </footer>
