@@ -33,7 +33,7 @@ export default function PackagingShowcase() {
           <div className="grid gap-4 md:grid-cols-2">
             <div className="relative h-[280px] overflow-hidden border border-[#334155]">
               <Image
-                src="/photos/photo1.jpg"
+                src="/photos/photo1.jpeg"
                 alt="Bhedetar Hills"
                 fill
                 className="object-cover transition-transform duration-500 hover:scale-105"
@@ -43,7 +43,7 @@ export default function PackagingShowcase() {
 
             <div className="relative h-[280px] overflow-hidden border border-[#334155]">
               <Image
-                src="/photos/photo2.jpg"
+                src="/photos/photo2.jpeg"
                 alt="Pure Spring Water"
                 fill
                 className="object-cover transition-transform duration-500 hover:scale-105"
@@ -53,7 +53,7 @@ export default function PackagingShowcase() {
 
             <div className="relative h-[320px] overflow-hidden border border-[#334155]">
               <Image
-                src="/photos/photo3.JPG"
+                src="/photos/photo3.jpeg"
                 alt="Water Quality"
                 fill
                 className="object-cover transition-transform duration-500 hover:scale-105"
