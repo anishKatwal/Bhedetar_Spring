@@ -63,7 +63,7 @@ export default function PackagingShowcase() {
 
             <div className="relative h-[280px] overflow-hidden border border-[#334155]">
               <Image
-                src="/photos/photo4.jpeg"
+                src="/photos/photo4.png"
                 alt="Water Processing"
                 fill
                 className="object-cover transition-transform duration-500 hover:scale-105"
