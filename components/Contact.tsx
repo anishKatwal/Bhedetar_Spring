@@ -121,8 +121,8 @@ toast.success("Inquiry submitted successfully!", {
             <div className="mt-8 space-y-6">
               {[
                 ["Location", "Bhedetar, Dhankuta, Nepal"],
-                ["Phone", "+977-9800000000"],
-                ["Email", "info@bhedetarspring.com"],
+                ["Phone", "+977-9804339998"],
+                ["Email", "bhedetarspringbottlers@gmail.com"],
                 ["Delivery", deliveryAreas.join(", ")],
                 ["Orders", "Retail, wholesale, custom wrappers, and event supply"],
               ].map(([label, value]) => (

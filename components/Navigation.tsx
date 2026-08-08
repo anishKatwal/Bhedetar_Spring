@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -17,8 +18,15 @@ export default function Navigation() {
   return (
     <nav className="fixed left-0 right-0 top-0 z-50 flex h-[68px] items-center justify-between border-b border-white/10 bg-[#0a2540]/95 px-[5%] backdrop-blur-md">
       <Link href="/" className="flex items-center gap-2.5 text-white transition-opacity hover:opacity-90">
-        <div className="flex h-9 w-9 items-center justify-center rounded-[50%_50%_50%_0%] bg-[#38bdf8] text-sm font-bold text-[#0a2540]">
-          BS
+        <div className="flex h-16 w-16 items-center justify-center">
+          <Image
+  src="/photos/logo.png"
+  alt="Bhedetar Spring Logo"
+  width={80}
+  height={80}
+  priority
+  className="object-contain"
+/>
         </div>
         <div className="font-serif text-lg tracking-wider">
           Bhedetar<span className="text-[#38bdf8]"> Spring</span>

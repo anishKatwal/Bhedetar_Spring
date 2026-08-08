@@ -225,9 +225,7 @@ npm run dev
 © 2026 Bhedetar Spring - All Rights Reserved
 
 ## 🤝 Contributing
-
-This project is maintained by Tamaso Studios.
-
+This project is built and maintained by Anish Katwal 
 ---
 
 **Ready to start development?**

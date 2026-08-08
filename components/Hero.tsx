@@ -53,7 +53,7 @@ export default function Hero() {
               <p className="text-xs uppercase tracking-wider text-white/50">Quality steps</p>
             </div>
             <div>
-              <div className="mb-1 text-3xl font-bold text-[#fde68a] md:text-4xl">4</div>
+              <div className="mb-1 text-3xl font-bold text-[#fde68a] md:text-4xl">2</div>
               <p className="text-xs uppercase tracking-wider text-white/50">Bottle sizes</p>
             </div>
             <div>

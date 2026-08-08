@@ -31,6 +31,8 @@ export default function Footer() {
             <h4 className="font-bold">Bottle sizes</h4>
             <ul className="mt-4 space-y-2 text-sm text-white/70">
               <li>500ml</li>
+                <li>900ml Branding</li>
+
               <li>1L</li>
             </ul>
           </div>
