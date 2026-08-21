@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import db from "@/lib/db";
 import { transporter } from "@/lib/mailer";
 
 type Inquiry = {
@@ -31,20 +30,7 @@ export async function POST(req: NextRequest) {
     }
 
     // 1. Save to SQLite
-    try {
-      const stmt = db.prepare(`
-        INSERT INTO inquiries (id, name, phone, location, eventType, bottleSize, quantity, wrapperNeed, message, createdAt)
-        VALUES (@id, @name, @phone, @location, @eventType, @bottleSize, @quantity, @wrapperNeed, @message, @createdAt)
-      `);
-      stmt.run(inquiry);
-    } catch (dbErr) {
-      console.error("DB insert failed:", dbErr);
-      return NextResponse.json(
-        { emailSent: false, error: "Failed to save inquiry" },
-        { status: 500 }
-      );
-    }
-
+   
     // 2. Send email via Gmail SMTP
     try {
       await transporter.sendMail({
